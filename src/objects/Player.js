@@ -10,12 +10,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.hp         = 3;
     this.maxHp      = 3;
-    this.fireRate   = 180;       // ms between shots
+    this.fireRate   = 180;       
     this._lastShot  = 0;
     this._invincible = false;
   }
 
-  // Call each frame, pass cursors + keys + bulletGroup + time
+  
   update(cursors, keys, bullets, time) {
     const speed = 280;
     this.setVelocity(0);
@@ -46,7 +46,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     if (this._invincible) return false;
     this.hp--;
     this._invincible = true;
-    // Flash effect
+   
     this.scene.tweens.add({
       targets: this, alpha: 0, duration: 80, yoyo: true,
       repeat: 6,

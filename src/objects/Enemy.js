@@ -26,12 +26,12 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(120);
     }
 
-    // Random sine-wave amplitude for horizontal drift
+   
     this._amp   = Phaser.Math.Between(40, 120);
     this._freq  = Phaser.Math.FloatBetween(0.8, 2.0);
     this._phase = Phaser.Math.FloatBetween(0, Math.PI * 2);
 
-    // Shooting
+    
     this._shootCooldown = type === 'tank'
       ? Phaser.Math.Between(1200, 2200)
       : Phaser.Math.Between(2000, 4000);
@@ -42,17 +42,17 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     this._time += delta;
     this._shootTimer -= delta;
 
-    // Horizontal sine drift
+   
     const dx = Math.sin(this._time * 0.001 * this._freq + this._phase) * this._amp;
     this.x = Phaser.Math.Clamp(this._startX + dx, 20, 460);
 
-    // Shoot toward player
+    
     if (this._shootTimer <= 0) {
       this._shootTimer = this._shootCooldown;
       this._shoot(enemyBullets, playerX, playerY);
     }
 
-    // Despawn below screen
+   
     if (this.y > 700) this.destroy();
   }
 

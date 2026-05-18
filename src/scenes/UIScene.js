@@ -10,7 +10,7 @@ export default class UIScene extends Phaser.Scene {
       fontSize: '16px', fontFamily: 'monospace', color: '#ef5350'
     }).setOrigin(1, 0);
 
-    // Listen to events emitted by GameScene
+    
     const game = this.scene.get('GameScene');
     game.events.on('scoreUpdate', s => {
       this._scoreText.setText('SCORE  ' + s);
@@ -21,7 +21,7 @@ export default class UIScene extends Phaser.Scene {
   }
 
   shutdown() {
-    // Clean up listeners when scene stops
+    
     const game = this.scene.get('GameScene');
     if (game) game.events.off('scoreUpdate');
     if (game) game.events.off('livesUpdate');

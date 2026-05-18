@@ -22,7 +22,7 @@ export default class GameOverScene extends Phaser.Scene {
       color: '#ffffff', lineSpacing: 14, align: 'center'
     }).setOrigin(0.5);
 
-    const blink = this.add.text(240, 390, 'PRESS SPACE TO RETRY', {
+    const blink = this.add.text(240, 390, 'CLICK TO RETRY', {
       fontSize: '16px', fontFamily: 'monospace', color: '#ffffff'
     }).setOrigin(0.5);
     this.tweens.add({ targets: blink, alpha: 0, duration: 550, yoyo: true, repeat: -1 });

@@ -1,5 +1,4 @@
-// BootScene.js
-// Generates all game textures programmatically — no image files needed.
+
 
 export default class BootScene extends Phaser.Scene {
   constructor() { super('BootScene'); }
@@ -15,13 +14,13 @@ export default class BootScene extends Phaser.Scene {
 
   _makePlayer() {
     const g = this.make.graphics({ x: 0, y: 0, add: false });
-    // Ship body
+    
     g.fillStyle(0x4fc3f7);
     g.fillTriangle(24, 0, 0, 52, 48, 52);
-    // Cockpit
+    
     g.fillStyle(0x81d4fa);
     g.fillTriangle(24, 8, 14, 32, 34, 32);
-    // Engine glow
+    
     g.fillStyle(0xff6f00);
     g.fillRect(12, 48, 10, 10);
     g.fillRect(26, 48, 10, 10);
@@ -30,7 +29,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   _makeEnemies() {
-    // Basic grunt
+   
     const g = this.make.graphics({ x: 0, y: 0, add: false });
     g.fillStyle(0xef5350);
     g.fillTriangle(20, 40, 0, 0, 40, 0);
@@ -39,7 +38,7 @@ export default class BootScene extends Phaser.Scene {
     g.generateTexture('enemy_grunt', 40, 42);
     g.destroy();
 
-    // Tank enemy (bigger, slower)
+    
     const g2 = this.make.graphics({ x: 0, y: 0, add: false });
     g2.fillStyle(0xab47bc);
     g2.fillRect(0, 0, 56, 48);
@@ -52,7 +51,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   _makeBullets() {
-    // Player bullet
+    
     const g = this.make.graphics({ x: 0, y: 0, add: false });
     g.fillStyle(0xfff176);
     g.fillRect(1, 0, 6, 18);
@@ -61,7 +60,7 @@ export default class BootScene extends Phaser.Scene {
     g.generateTexture('bullet_player', 8, 18);
     g.destroy();
 
-    // Enemy bullet
+    
     const g2 = this.make.graphics({ x: 0, y: 0, add: false });
     g2.fillStyle(0xff5252);
     g2.fillCircle(5, 5, 5);
@@ -78,7 +77,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   _makeStars() {
-    // Background star tile (tileSprite scrolls this)
+    
     const g = this.make.graphics({ x: 0, y: 0, add: false });
     g.fillStyle(0x000011);
     g.fillRect(0, 0, 480, 640);

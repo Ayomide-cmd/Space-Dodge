@@ -5,10 +5,10 @@ export default class GameScene extends Phaser.Scene {
   constructor() { super({ key: 'GameScene', active: false }); }
 
   create() {
-    // --- Background ---
+   
     this._bg = this.add.tileSprite(0, 0, 480, 640, 'stars').setOrigin(0, 0);
 
-    // --- Groups ---
+   
     this._playerBullets = this.physics.add.group({
       classType: Phaser.Physics.Arcade.Image,
       maxSize: 40, runChildUpdate: false
@@ -19,10 +19,10 @@ export default class GameScene extends Phaser.Scene {
     });
     this._enemies = this.physics.add.group();
 
-    // --- Player ---
+   
     this._player = new Player(this, 240, 560);
 
-    // --- Input ---
+    
     this._cursors = this.input.keyboard.createCursorKeys();
     this._keys    = this.input.keyboard.addKeys({
       W: Phaser.Input.Keyboard.KeyCodes.W,
@@ -33,14 +33,14 @@ export default class GameScene extends Phaser.Scene {
       SPACE: Phaser.Input.Keyboard.KeyCodes.SPACE
     });
 
-    // --- Score / state ---
+    
     this.score  = 0;
     this.lives  = 3;
     this._wave  = 0;
     this._waveTimer = 0;
-    this._waveInterval = 4000; // ms between waves
+    this._waveInterval = 4000; 
 
-    // --- Collisions ---
+   
     this.physics.add.overlap(
       this._playerBullets, this._enemies,
       this._onBulletHitEnemy, null, this
@@ -65,18 +65,18 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    // Scroll background
+    
     this._bg.tilePositionY -= 1.4;
 
-    // Player update
+   
     this._player.update(this._cursors, this._keys, this._playerBullets, time);
 
-    // Enemy update
+    
     this._enemies.getChildren().forEach(e =>
       e.update(delta, this._enemyBullets, this._player.x, this._player.y)
     );
 
-    // Recycle off-screen bullets
+   
     this._playerBullets.getChildren().forEach(b => {
       if (b.active && b.y < -20) b.setActive(false).setVisible(false);
     });
@@ -86,7 +86,7 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    // Wave spawner
+    
     this._waveTimer += delta;
     if (this._waveTimer >= this._waveInterval) {
       this._waveTimer = 0;
@@ -94,12 +94,12 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  // ------------------------------------------------------------------ spawning
+  
 
   _spawnWave() {
     this._wave++;
 
-    // Ramp difficulty: faster waves, more tanks after wave 5
+    
     const tankChance = Math.min(0.1 + this._wave * 0.05, 0.4);
     const count = Math.min(3 + Math.floor(this._wave / 2), 8);
 
@@ -147,15 +147,14 @@ export default class GameScene extends Phaser.Scene {
     if (this.lives <= 0) this._gameOver();
   }
 
-  // ------------------------------------------------------------------ effects
+ 
 
   _explode(x, y) {
     this._particles.setPosition(x, y);
     this._particles.explode(18);
     this.cameras.main.shake(80, 0.006);
   }
-
-  // ------------------------------------------------------------------ game over
+   
 
   _gameOver() {
     this.scene.stop('UIScene');
